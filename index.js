@@ -29,7 +29,8 @@ function iconfontCSS(config) {
 		fixedCodepoints: false,
 		cssClass: 'icon',
 		aliases: {},
-		cacheBuster: ''
+		cacheBuster: '',
+		suffix:''
 	}, config);
 
 	// Enable default stylesheet generators
@@ -120,8 +121,8 @@ function iconfontCSS(config) {
 					fontName: config.fontName,
 					fontPath: config.fontPath,
 					cssClass: config.cssClass,
-					cacheBuster: config.cacheBuster,
-					cacheBusterQueryString: config.cacheBuster ? '?' + config.cacheBuster : ''
+					cacheBuster: (config.suffix + '?' + config.cacheBuster),
+					cacheBusterQueryString: config.suffix + ((config.cacheBuster) ? '?' + config.cacheBuster : '')
 				}, function(err, html) {
 					if (err) {
 						throw new PluginError(PLUGIN_NAME, 'Error in template: ' + err.message);
