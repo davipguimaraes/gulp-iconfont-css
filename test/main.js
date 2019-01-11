@@ -140,6 +140,24 @@ function testCacheBuster() {
 	});
 }
 
+function testSuffix() {
+	it('should use given siffix in name file', function(done) {
+		var dest = resultsDir + '_cache_suffix';
+
+		run('css', dest, {
+			suffix: '.css'
+		})
+			.pipe(es.wait(function() {
+				assert.equal(
+					fs.readFileSync(dest + '/css/_icons.css', 'utf8'),
+					fs.readFileSync(__dirname + '/expected/cache_suffix/css/_icons.css', 'utf8')
+				);
+
+				cleanUp(dest, done);
+			}));
+	});
+}
+
 
 describe('gulp-iconfont-css', function() {
 	testType('scss', 'SCSS');
@@ -150,4 +168,5 @@ describe('gulp-iconfont-css', function() {
 	testCodepointFirst();
 	testCodepointFixed();
 	testCacheBuster();
+	testSuffix();
 });
